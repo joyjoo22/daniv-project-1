@@ -1,0 +1,224 @@
+/* 단이브 글로벌 스타일 */
+
+/* 폰트 — Pretendard Variable + JetBrains Mono CDN */
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+/* 디자인 토큰 + 애니메이션 */
+@import './tokens.css';
+@import './animations.css';
+
+/* Tailwind 디렉티브 */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── BASE ──────────────────────────────────────────────── */
+@layer base {
+  html, body, #root {
+    height: 100%;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-kr);
+    color: var(--ink);
+    background: var(--bg);
+    -webkit-font-smoothing: antialiased;
+    letter-spacing: -0.015em;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+
+  button {
+    font-family: inherit;
+    cursor: pointer;
+    border: 0;
+    background: none;
+    color: inherit;
+    padding: 0;
+  }
+  input, textarea { font-family: inherit; }
+  a { color: inherit; text-decoration: none; }
+}
+
+/* ── COMPONENTS — 시안 ui.jsx / tokens.css의 공용 유틸 ── */
+@layer components {
+  /* 스크롤 영역 */
+  .scroll {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+  .scroll::-webkit-scrollbar { display: none; }
+
+  /* 칩 */
+  .chip {
+    height: 32px;
+    padding: 0 12px;
+    border-radius: var(--r-pill);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink-2);
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .chip[data-active="true"] {
+    background: var(--ink);
+    color: var(--bg);
+    border-color: var(--ink);
+  }
+
+  /* 버튼 */
+  .btn-primary {
+    height: 52px;
+    border-radius: var(--r-md);
+    width: 100%;
+    background: var(--ink);
+    color: var(--bg);
+    font-weight: 600;
+    font-size: 16px;
+    letter-spacing: -0.01em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: transform 0.12s ease, background 0.12s ease;
+  }
+  .btn-primary:active { transform: scale(0.98); background: var(--primary-ink); }
+  .btn-primary[disabled] { background: var(--ink-4); cursor: not-allowed; }
+
+  .btn-ghost {
+    height: 44px;
+    padding: 0 14px;
+    border-radius: var(--r-md);
+    background: var(--bg-2);
+    color: var(--ink-2);
+    font-weight: 500;
+    font-size: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* 카드 */
+  .card {
+    background: var(--card);
+    border-radius: var(--r-lg);
+    border: 1px solid var(--line);
+  }
+
+  /* 태그 (배지) */
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 8px;
+    border-radius: var(--r-pill);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0;
+  }
+  .tag-amber  { background: var(--accent-soft); color: var(--accent-ink); }
+  .tag-indigo { background: var(--primary-soft); color: var(--primary-ink); }
+  .tag-mint   { background: oklch(0.94 0.04 165); color: oklch(0.42 0.12 165); }
+  .tag-rose   { background: oklch(0.94 0.04 18);  color: oklch(0.42 0.14 18); }
+
+  /* 줄무늬 플레이스홀더 (이미지 자리) */
+  .ph {
+    position: relative;
+    background:
+      repeating-linear-gradient(135deg,
+        oklch(0.94 0.01 80) 0 8px,
+        oklch(0.91 0.012 80) 8px 16px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: oklch(0.52 0.012 80);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  /* 캠퍼스 지도 모킹 */
+  .map-canvas {
+    background:
+      radial-gradient(ellipse at 30% 40%, oklch(0.94 0.03 145) 0, transparent 38%),
+      radial-gradient(ellipse at 70% 70%, oklch(0.96 0.025 235) 0, transparent 42%),
+      linear-gradient(180deg, oklch(0.97 0.012 100), oklch(0.95 0.015 90));
+    position: relative;
+    overflow: hidden;
+  }
+  .map-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(90deg, rgba(50, 40, 80, 0.05) 1px, transparent 1px),
+      linear-gradient(0deg, rgba(50, 40, 80, 0.05) 1px, transparent 1px);
+    background-size: 28px 28px;
+    pointer-events: none;
+  }
+
+  /* 폼 필드 */
+  .field {
+    height: 52px;
+    padding: 0 16px;
+    border-radius: var(--r-md);
+    border: 1px solid var(--line);
+    background: var(--card);
+    width: 100%;
+    font-size: 15px;
+    color: var(--ink);
+  }
+  .field:focus { outline: none; border-color: var(--ink); }
+  .field-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--ink-3);
+    margin-bottom: 8px;
+    display: block;
+    letter-spacing: 0;
+  }
+
+  /* 세그먼트 컨트롤 */
+  .seg {
+    display: flex;
+    padding: 4px;
+    gap: 4px;
+    background: var(--bg-3);
+    border-radius: var(--r-md);
+  }
+  .seg button {
+    flex: 1;
+    height: 36px;
+    border-radius: calc(var(--r-md) - 4px);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink-3);
+  }
+  .seg button[data-active="true"] {
+    background: var(--card);
+    color: var(--ink);
+    box-shadow: var(--sh-1);
+  }
+
+  /* 모노/숫자 */
+  .mono {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* 섹션 구분선 */
+  .section-divider {
+    height: 1px;
+    background: var(--line);
+    margin: 0 16px;
+  }
+}

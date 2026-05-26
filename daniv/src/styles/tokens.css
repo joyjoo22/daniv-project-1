@@ -1,0 +1,119 @@
+/* 단이브 디자인 토큰 — 시안 design-mockup/tokens.css 기반.
+   다크 모드 셀렉터를 .daniv.dark → html.dark 로 변경하여
+   Tailwind darkMode:'class' 와 호환되도록 조정. */
+
+:root {
+  /* Brand */
+  --ink: oklch(0.18 0.025 270);
+  --ink-2: oklch(0.32 0.02 270);
+  --ink-3: oklch(0.52 0.015 270);
+  --ink-4: oklch(0.72 0.012 270);
+
+  --bg: oklch(0.985 0.005 80);
+  --bg-2: oklch(0.965 0.008 80);
+  --bg-3: oklch(0.945 0.012 80);
+  --card: #ffffff;
+
+  --primary: oklch(0.42 0.18 270);          /* deep indigo */
+  --primary-soft: oklch(0.92 0.04 270);
+  --primary-ink: oklch(0.32 0.18 270);
+
+  --accent: oklch(0.74 0.16 55);            /* warm amber */
+  --accent-soft: oklch(0.94 0.05 60);
+  --accent-ink: oklch(0.52 0.16 50);
+
+  --mint: oklch(0.78 0.13 165);
+  --rose: oklch(0.72 0.16 18);
+  --sky:  oklch(0.78 0.10 235);
+
+  --line: oklch(0.92 0.008 80);
+  --line-2: oklch(0.88 0.01 80);
+
+  /* Hero — 라이트/다크 모두 어두운 톤 유지 */
+  --hero-bg: oklch(0.18 0.025 270);
+  --hero-bg-2: oklch(0.24 0.04 270);
+  --hero-fg: #ffffff;
+
+  /* Hero 버튼 (사진 위 글래스 버튼) — 시안의 heroBtn 변형 */
+  --hero-btn-bg: rgba(255, 255, 255, 0.9);
+  --hero-btn-fg: var(--ink);
+
+  /* 모바일 하단 탭바 높이 — content padding-bottom 계산에 사용 */
+  --bottom-tab-h: 76px;
+
+  /* Radius */
+  --r-xs: 8px;
+  --r-sm: 12px;
+  --r-md: 18px;
+  --r-lg: 22px;
+  --r-xl: 28px;
+  --r-pill: 999px;
+
+  /* Shadow */
+  --sh-1: 0 1px 2px rgba(20, 16, 40, 0.04), 0 2px 8px rgba(20, 16, 40, 0.04);
+  --sh-2: 0 2px 6px rgba(20, 16, 40, 0.06), 0 10px 28px rgba(20, 16, 40, 0.08);
+  --sh-3: 0 4px 12px rgba(20, 16, 40, 0.08), 0 20px 50px rgba(20, 16, 40, 0.12);
+
+  --font-kr: "Pretendard Variable", "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, "Apple SD Gothic Neo", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+/* ── DARK MODE — html.dark 또는 :root.dark 에서 활성화 ── */
+html.dark {
+  --ink: oklch(0.97 0.005 270);
+  --ink-2: oklch(0.86 0.008 270);
+  --ink-3: oklch(0.68 0.01 270);
+  --ink-4: oklch(0.48 0.012 270);
+
+  --bg: oklch(0.16 0.012 270);
+  --bg-2: oklch(0.20 0.014 270);
+  --bg-3: oklch(0.24 0.016 270);
+  --card: oklch(0.22 0.014 270);
+
+  --primary: oklch(0.72 0.16 270);
+  --primary-soft: oklch(0.30 0.06 270);
+  --primary-ink: oklch(0.86 0.10 270);
+
+  --accent: oklch(0.82 0.14 60);
+  --accent-soft: oklch(0.30 0.06 60);
+  --accent-ink: oklch(0.88 0.12 60);
+
+  --line: oklch(0.30 0.014 270);
+  --line-2: oklch(0.36 0.018 270);
+
+  --sh-1: 0 1px 2px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(0, 0, 0, 0.3);
+  --sh-2: 0 2px 6px rgba(0, 0, 0, 0.4), 0 10px 28px rgba(0, 0, 0, 0.45);
+  --sh-3: 0 4px 12px rgba(0, 0, 0, 0.45), 0 20px 50px rgba(0, 0, 0, 0.5);
+
+  --hero-bg: oklch(0.10 0.014 270);
+  --hero-bg-2: oklch(0.18 0.03 270);
+
+  /* 다크 모드: 어두운 글래스 + 밝은 아이콘 — 사진 위에서도 잘 보임 */
+  --hero-btn-bg: rgba(20, 16, 40, 0.55);
+  --hero-btn-fg: #ffffff;
+}
+
+/* 다크 모드 전용 태그/플레이스홀더 색상 보정 */
+html.dark .tag-amber  { background: oklch(0.30 0.07 60);  color: oklch(0.86 0.13 60); }
+html.dark .tag-indigo { background: oklch(0.30 0.07 270); color: oklch(0.86 0.13 270); }
+html.dark .tag-mint   { background: oklch(0.28 0.06 165); color: oklch(0.84 0.12 165); }
+html.dark .tag-rose   { background: oklch(0.30 0.07 18);  color: oklch(0.84 0.13 18); }
+
+html.dark .map-canvas {
+  background:
+    radial-gradient(ellipse at 30% 40%, oklch(0.25 0.04 270) 0, transparent 38%),
+    radial-gradient(ellipse at 70% 70%, oklch(0.24 0.03 235) 0, transparent 42%),
+    linear-gradient(180deg, oklch(0.18 0.012 270), oklch(0.20 0.014 270));
+}
+html.dark .map-grid {
+  background-image:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+}
+html.dark .ph {
+  background:
+    repeating-linear-gradient(135deg,
+      oklch(0.24 0.014 270) 0 8px,
+      oklch(0.22 0.012 270) 8px 16px);
+  color: oklch(0.55 0.01 270);
+}

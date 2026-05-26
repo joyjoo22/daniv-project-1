@@ -1,0 +1,79 @@
+/* 단이브 공통 애니메이션 — 시안 ui.jsx의 키프레임 이식 */
+
+@keyframes daniv-pulse {
+  0% { transform: scale(0.6); opacity: 0.5; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+@keyframes daniv-fade {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* 컨테이너 내부 자식에 stagger fade-in 효과를 줄 때 사용 */
+.daniv-enter > * { animation: daniv-fade 0.35s ease both; }
+.daniv-enter > *:nth-child(2) { animation-delay: 0.05s; }
+.daniv-enter > *:nth-child(3) { animation-delay: 0.10s; }
+.daniv-enter > *:nth-child(4) { animation-delay: 0.15s; }
+.daniv-enter > *:nth-child(5) { animation-delay: 0.20s; }
+.daniv-enter > *:nth-child(6) { animation-delay: 0.25s; }
+
+/* ────────── 스플래시 / 진입 모션 ────────── */
+
+/* 1) 인디고 원 — 작게 시작해서 살짝 튀어오르듯 등장 */
+@keyframes daniv-splash-circle {
+  0%   { opacity: 0; transform: scale(0.5) translateY(8px); }
+  60%  { opacity: 1; transform: scale(1.08) translateY(0); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* 2) 앰버 도트 — 인디고 등장 후 늦게, 더 강하게 튀어오름 (액센트 강조) */
+@keyframes daniv-splash-dot {
+  0%   { opacity: 0; transform: scale(0); }
+  50%  { opacity: 1; transform: scale(1.3); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+/* 3) "단이브" 글자 — 아래에서 살짝 올라오며 페이드인 */
+@keyframes daniv-splash-text {
+  0%   { opacity: 0; transform: translateY(10px); letter-spacing: 0; }
+  100% { opacity: 1; transform: translateY(0); letter-spacing: -0.04em; }
+}
+
+/* 4) 캡션 — 워드마크 다음에 천천히 페이드인 */
+@keyframes daniv-splash-caption {
+  0%   { opacity: 0; transform: translateY(6px); }
+  100% { opacity: 0.55; transform: translateY(0); }
+}
+
+/* 5) 로딩 dots — 잔잔하게 펄스 */
+@keyframes daniv-splash-pulse {
+  0%, 100% { opacity: 0.25; transform: scale(0.85); }
+  50%      { opacity: 1; transform: scale(1.15); }
+}
+
+/* 6) 스플래시 전체 페이드아웃 — 살짝 확대되며 사라져 "들어가는" 느낌 */
+@keyframes daniv-splash-out {
+  0%   { opacity: 1; transform: scale(1); filter: blur(0); }
+  100% { opacity: 0; transform: scale(1.06); filter: blur(2px); }
+}
+
+/* 7) 페이지/카드 단위 페이드인 — 부분적인 진입 모션에 사용 가능.
+   ⚠️ position:fixed 자식을 포함한 wrapper 에는 사용 금지!
+      transform 이 적용된 요소는 자손의 fixed positioning containing block 이 되어,
+      bottom tab bar 같은 fixed 요소가 viewport 가 아닌 이 요소 기준으로 움직임. */
+@keyframes daniv-app-in {
+  0%   { opacity: 0; transform: translateY(6px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* 접근성 — 사용자가 모션 감소를 요청한 경우 즉시 표시 */
+@media (prefers-reduced-motion: reduce) {
+  @keyframes daniv-splash-circle  { from, to { opacity: 1; transform: none; } }
+  @keyframes daniv-splash-dot     { from, to { opacity: 1; transform: none; } }
+  @keyframes daniv-splash-text    { from, to { opacity: 1; transform: none; letter-spacing: -0.04em; } }
+  @keyframes daniv-splash-caption { from, to { opacity: 0.55; transform: none; } }
+  @keyframes daniv-splash-pulse   { from, to { opacity: 0.55; transform: none; } }
+  @keyframes daniv-splash-out     { from, to { opacity: 0; transform: none; filter: none; } }
+  @keyframes daniv-app-in         { from, to { opacity: 1; transform: none; } }
+}
